@@ -214,6 +214,9 @@ fn msi_install_dir(app: &App) -> Option<PathBuf> {
     (!dir.is_empty()).then(|| PathBuf::from(dir))
 }
 
+/// How the running copy at `exe` was installed on Linux, or `None` when it isn't this app's to
+/// update: a Flatpak bundle installed per user, an AppImage, the deb/rpm/Arch package at
+/// `/usr/bin/<id>`, or a standalone copy outside the package managers' folders ([`linux_location`]).
 #[cfg(target_os = "linux")]
 fn detect(app: &App, exe: &Path) -> Option<Install> {
     if process::in_sandbox() {
@@ -263,6 +266,7 @@ enum LinuxLocation {
     Elsewhere,
 }
 
+/// Which [`LinuxLocation`] `exe` is in, from its path alone.
 #[cfg_attr(not(target_os = "linux"), allow(dead_code))]
 fn linux_location(app: &App, exe: &Path) -> LinuxLocation {
     if exe == Path::new("/usr/bin").join(app.id) {

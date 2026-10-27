@@ -439,6 +439,8 @@ mod tests {
         }
     }
 
+    /// A link that shares the download prefix as text but climbs into another repository with `..`
+    /// or an encoded separator or dot isn't under it.
     #[test]
     fn traversal_cannot_escape_the_repository() {
         // Raw-prefix matches but the interpreted path climbs into another repository (CWE-180).
@@ -476,6 +478,8 @@ mod tests {
         assert_eq!(parse_github_release_list("[]", REPO, false).unwrap(), None);
     }
 
+    /// `SHA256SUMS.txt` lines, the tag in a `releases/latest` redirect, and the release built from
+    /// both; malformed lines, traversing names and `.`/`..` tags are dropped.
     #[test]
     fn reads_checksums_and_redirects() {
         let sums = parse_sha256sums(&format!("{HASH}  photocraft-0.5.0-macos-universal.dmg\n{HASH} *b.zip\nnot a line\n{HASH}  ../escape\n"));
