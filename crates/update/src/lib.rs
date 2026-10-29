@@ -26,6 +26,8 @@ pub mod msi_context;
 #[cfg(feature = "native")]
 mod msi_copy;
 #[cfg(feature = "native")]
+mod msi_migrate;
+#[cfg(feature = "native")]
 pub mod packages;
 #[cfg(feature = "native")]
 pub mod paths;
