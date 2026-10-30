@@ -983,6 +983,7 @@ name = "craft-print"
 version = "0.1.0"
 dependencies = [
  "craft-winprint-gdi",
+ "log",
  "miniz_oxide 0.9.1",
  "roxmltree 0.21.2",
  "tempfile",
@@ -1063,6 +1064,7 @@ dependencies = [
  "egui",
  "flate2",
  "getrandom 0.3.4",
+ "image",
  "log",
  "plist",
  "semver",
